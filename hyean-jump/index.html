@@ -153,7 +153,7 @@ button:active{transform:scale(.965)}
     <button id="importData" class="savebtn" style="padding:13px 8px">⬇️ 기록 가져오기</button>
   </div>
   <textarea id="transferData" class="memo" rows="5" style="margin-top:10px;font-size:11px"
-    placeholder="내보내기를 누르면 백업 코드가 여기에 생겨요. 가져올 때는 코드를 붙여넣으세요."></textarea>
+    placeholder="Safari에서 내보내기 → 홈 화면 앱에서 붙여넣기 → 기록 가져오기"></textarea>
   <p id="transferHint" style="font-size:11px;color:#9a9fa6;margin:8px 2px 0">가져오기는 현재 기록과 합쳐집니다. 같은 날짜는 더 최근에 저장한 기록을 우선합니다.</p>
 </div>
 <div id="toast" class="toast"></div>
@@ -183,54 +183,68 @@ function richStats(){
 function renderStats(){let now=new Date(),arr=[];for(let i=6;i>=0;i--){let d=new Date(now);d.setDate(now.getDate()-i);let r=db.records[key(d)],t=r?.status==='saved'?total(r):0;arr.push([`${d.getMonth()+1}/${d.getDate()}`,t])}let max=Math.max(db.goal,...arr.map(x=>x[1]));$('bars').innerHTML=arr.map(([l,n])=>`<div class="barcol"><div>${n?fmt(n):''}</div><div class="bar" style="height:${Math.max(2,n/max*120)}px"></div>${l}</div>`).join('');richStats()}
 renderCal();
 
-// v9: Safari ↔ Home Screen data transfer
+// v10: robust Safari ↔ Home Screen data transfer
 (function(){
-  function setupTransfer(){
-    const exp=document.getElementById('exportData'), imp=document.getElementById('importData'),
-          box=document.getElementById('transferData');
+  function setupTransferV10(){
+    const exp=document.getElementById('exportData');
+    const imp=document.getElementById('importData');
+    const box=document.getElementById('transferData');
     if(!exp||!imp||!box) return;
 
+    // JSON itself is the backup code. This avoids Base64/Unicode/iOS clipboard decoding problems.
     exp.onclick=async()=>{
-      const raw=localStorage.getItem('jumpday-v1')||'';
+      const raw=localStorage.getItem('jumpday-v1');
       if(!raw){ toast('내보낼 기록이 없어요'); return; }
-      const payload='HYEANJUMP1:'+btoa(unescape(encodeURIComponent(raw)));
-      box.value=payload;
-      box.focus(); box.select();
       try{
-        await navigator.clipboard.writeText(payload);
-        toast('백업 코드를 복사했어요 ✓');
-      }catch(e){ toast('백업 코드가 만들어졌어요. 전체 복사해 주세요'); }
+        const obj=JSON.parse(raw);
+        const payload=JSON.stringify({type:'HYEANJUMP',version:10,data:obj});
+        box.value=payload;
+        box.focus(); box.select();
+        try{
+          await navigator.clipboard.writeText(payload);
+          toast('백업 코드를 복사했어요 ✓');
+        }catch(e){
+          toast('코드가 만들어졌어요. 전체 선택 → 복사해 주세요');
+        }
+      }catch(e){ toast('Safari 기록을 읽지 못했어요'); }
     };
 
     imp.onclick=()=>{
-      let code=box.value.trim();
-      if(!code){ toast('Safari에서 만든 백업 코드를 붙여넣어 주세요'); return; }
+      let code=(box.value||'').trim();
+      if(!code){ toast('백업 코드를 붙여넣어 주세요'); return; }
       try{
-        if(code.startsWith('HYEANJUMP1:')) code=decodeURIComponent(escape(atob(code.slice(11))));
-        const incoming=JSON.parse(code);
-        if(!incoming || typeof incoming!=='object' || !incoming.records) throw new Error('bad');
+        // Remove accidental smart quotes / invisible clipboard characters around JSON.
+        code=code.replace(/^[\uFEFF\u200B-\u200D]+|[\uFEFF\u200B-\u200D]+$/g,'');
+        let parsed=JSON.parse(code);
+        let incoming=(parsed && parsed.type==='HYEANJUMP' && parsed.data) ? parsed.data : parsed;
+        if(!incoming || typeof incoming!=='object' || !incoming.records || typeof incoming.records!=='object')
+          throw new Error('invalid');
 
         let current={goal:1500,records:{}};
-        try{ current=JSON.parse(localStorage.getItem('jumpday-v1'))||current; }catch(e){}
-        current.goal=incoming.goal||current.goal||1500;
+        try{
+          const cur=JSON.parse(localStorage.getItem('jumpday-v1')||'null');
+          if(cur && typeof cur==='object') current=cur;
+        }catch(e){}
+        current.goal=Number(incoming.goal)||Number(current.goal)||1500;
         current.records=current.records||{};
 
-        Object.entries(incoming.records||{}).forEach(([k,r])=>{
+        Object.keys(incoming.records).forEach(k=>{
+          const r=incoming.records[k];
           const old=current.records[k];
-          if(!old || Number(r.updatedAt||0)>=Number(old.updatedAt||0)) current.records[k]=r;
+          if(!old || Number(r?.updatedAt||0)>=Number(old?.updatedAt||0)) current.records[k]=r;
         });
 
         localStorage.setItem('jumpday-v1',JSON.stringify(current));
-        toast('기록을 가져왔어요 ✓');
-        setTimeout(()=>location.reload(),650);
+        toast('기록 가져오기 완료 ✓');
+        setTimeout(()=>location.reload(),500);
       }catch(e){
-        toast('백업 코드를 확인해 주세요');
+        toast('코드가 잘렸어요. Safari에서 다시 내보내기 후 전체 붙여넣기 해주세요');
       }
     };
   }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupTransfer);
-  else setupTransfer();
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupTransferV10);
+  else setupTransferV10();
 })();
 
-</script><!-- Hyean Jump v9 data-transfer -->
+</script><!-- Hyean Jump v10 robust JSON transfer -->
 </body></html>
