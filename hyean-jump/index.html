@@ -6,8 +6,134 @@
 :root{--bg:#f7f6f2;--card:#fff;--ink:#252525;--muted:#858585;--green:#4f9b72;--green2:#e2f2e9;--orange:#e7a24d;--orange2:#fff0dc;--blue:#4d78a8;--line:#e8e6df;--red:#c75d5d}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Noto Sans KR",sans-serif;background:var(--bg);color:var(--ink)}button,input,textarea{font:inherit}.app{max-width:520px;margin:auto;min-height:100vh;padding:env(safe-area-inset-top) 16px calc(92px + env(safe-area-inset-bottom))}.top{display:flex;justify-content:space-between;align-items:end;padding:20px 2px 12px}.top h1{margin:0;font-size:28px;letter-spacing:-1px}.goal{font-size:13px;color:var(--muted)}.card{background:var(--card);border-radius:22px;padding:17px;box-shadow:0 2px 12px #00000008;margin-bottom:14px}.monthhead{display:flex;align-items:center;justify-content:space-between}.monthhead button,.iconbtn{border:0;background:#f2f1ed;border-radius:12px;width:40px;height:40px;font-size:20px}.monthtitle{font-weight:750;font-size:18px}.week,.calendar{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;width:100%;min-width:0}.week>*{min-width:0}.calendar>*{min-width:0}.day{min-width:0;width:100%;max-width:100%;overflow:hidden}.week{margin-top:14px;color:#999;text-align:center;font-size:12px}.calendar{margin-top:7px}.day{position:relative;border:0;background:transparent;border-radius:13px;aspect-ratio:.88;padding:5px 2px;color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px}.day.blank{pointer-events:none}.day.today{outline:2px solid #282828}.day .num{font-size:13px;font-weight:650}.day .count{font-size:10px;color:#666}.day.done{background:var(--green2)}.day.partial{background:var(--orange2)}.day.draft{background:#e9eef5}.day.pastempty{color:#aaa}.statusdot{font-size:11px;height:12px}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.metric{text-align:center;background:#faf9f6;border-radius:15px;padding:12px 4px}.metric b{display:block;font-size:18px}.metric span{font-size:10px;color:var(--muted)}.legend{font-size:11px;color:#777;display:flex;gap:11px;flex-wrap:wrap;margin-top:12px}.bottom{position:fixed;left:50%;transform:translateX(-50%);bottom:0;width:min(520px,100%);background:#ffffffee;backdrop-filter:blur(14px);padding:9px 20px calc(9px + env(safe-area-inset-bottom));border-top:1px solid var(--line);display:flex;justify-content:space-around}.tab{border:0;background:none;color:#8b8b8b;font-size:12px}.tab.active{color:#222;font-weight:700}.tab i{font-style:normal;font-size:22px;display:block;margin-bottom:2px}.view{display:none}.view.active{display:block}.back{border:0;background:none;padding:6px 0;font-size:15px}.recordTitle{text-align:center;margin:-28px 0 20px;font-weight:750}.bigTotal{text-align:center;padding:10px 0}.bigTotal .n{font-size:52px;font-weight:800;letter-spacing:-2px}.bigTotal .unit{font-size:15px;color:#777}.progress{height:10px;background:#eceae5;border-radius:99px;overflow:hidden}.progress>div{height:100%;background:var(--green);width:0;transition:.2s}.remain{text-align:center;font-size:12px;color:#777;margin-top:8px}.sectiontitle{font-weight:750;margin-bottom:10px}.expression{min-height:26px;text-align:center;color:#666;font-size:16px;word-break:break-all}.entryrow{display:flex;gap:8px;margin-top:12px}.entryrow input{min-width:0;flex:1;border:1px solid var(--line);border-radius:15px;padding:14px;font-size:20px;text-align:center}.addbtn{border:0;background:#282828;color:#fff;border-radius:15px;padding:0 20px;font-weight:700}.undo{display:block;margin:10px auto 0;border:0;background:none;color:#777;font-size:12px}.bonus{display:flex;align-items:center;justify-content:center;gap:20px}.bonus button{border:0;background:#efeee9;border-radius:15px;width:58px;height:48px;font-weight:750}.bonus b{font-size:27px;min-width:70px;text-align:center}.moods{display:flex;justify-content:space-between;gap:5px}.mood{border:2px solid transparent;background:#f5f4f0;border-radius:16px;padding:9px 4px;flex:1;font-size:22px}.mood small{display:block;font-size:9px;color:#777;margin-top:4px}.mood.sel{border-color:#333;background:#fff}.memo{width:100%;border:1px solid var(--line);border-radius:14px;padding:12px;resize:none}.actions{display:flex;gap:9px;position:sticky;bottom:0;background:var(--bg);padding:8px 0 calc(4px + env(safe-area-inset-bottom))}.actions button{flex:1;border:0;border-radius:16px;padding:15px;font-weight:750}.draftbtn{background:#e8e6df}.savebtn{background:#282828;color:#fff}.settings label{display:block;font-size:12px;color:#777;margin-bottom:5px}.settings input{width:100%;border:1px solid var(--line);border-radius:14px;padding:13px}.danger{width:100%;border:0;background:#f6e7e7;color:#9a4040;border-radius:14px;padding:13px;margin-top:12px}.bars{display:flex;align-items:end;gap:8px;height:180px;padding-top:15px}.barcol{flex:1;text-align:center;font-size:10px;color:#777}.bar{background:#8eb89f;border-radius:7px 7px 3px 3px;min-height:2px;margin-bottom:6px}.toast{position:fixed;left:50%;bottom:95px;transform:translateX(-50%) translateY(20px);background:#222;color:white;padding:11px 16px;border-radius:99px;font-size:13px;opacity:0;pointer-events:none;transition:.2s;z-index:5}.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 :root{--bg:#f5f5f2;--card:#fff;--ink:#18212f;--muted:#7b8491;--line:#e9e9e5;--blue:#3478f6;--green:#42b883;--coral:#ff6b66;--lav:#eee9f6}body{background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Pretendard",sans-serif}.app{max-width:480px;margin:auto;padding:16px 16px calc(92px + env(safe-area-inset-bottom))}.card{background:rgba(255,255,255,.97);border:1px solid var(--line);box-shadow:0 5px 22px rgba(20,28,38,.045);border-radius:20px}button{transition:transform .08s ease}button:active{transform:scale(.97)}.day{border-radius:13px}.day.skipped{background:var(--lav)!important;color:#705a8b!important}.actions{position:sticky;bottom:calc(10px + env(safe-area-inset-bottom));z-index:8}.savebtn{background:var(--blue)!important;box-shadow:0 7px 18px rgba(52,120,246,.18)}.draftbtn{background:#eaf1ff!important;color:#2867d7!important}.bonus{display:grid!important;grid-template-columns:1fr 1fr auto 1fr 1fr!important;gap:6px!important}.bonus button{width:100%!important;min-width:0!important;height:46px!important;border-radius:13px!important;font-size:12px!important}.bonus b{min-width:56px!important;font-size:23px!important}.statgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.statbox{padding:14px;border:1px solid var(--line);border-radius:16px;background:#fff}.statbox small{display:block;color:var(--muted);font-size:12px;margin-bottom:6px}.statbox strong{font-size:21px}.monthchart{display:flex;align-items:flex-end;gap:8px;height:150px;padding-top:16px}.mbarwrap{flex:1;text-align:center;min-width:0}.mbararea{height:105px;display:flex;justify-content:center;align-items:flex-end;gap:3px}.mbar{width:12px;border-radius:7px 7px 3px 3px;background:#70cfa7;min-height:3px}.mbar.goal{background:#6da2ff}.mbarwrap small{font-size:10px;color:var(--muted)}.mbarwrap b{display:block;font-size:10px;margin-bottom:3px}.monthrows{display:grid;gap:5px}.monthrow{display:grid;grid-template-columns:1.15fr .8fr .8fr 1fr;gap:5px;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0ed;font-size:12px}.monthrow:last-child{border-bottom:0}.monthrow strong{color:#279b70}.sectionhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}.sectionhead h3{margin:0;font-size:16px}.sectionhead span{font-size:11px;color:var(--muted)}
+
+/* ===== 혜안's Jump v8 — strong visual redesign, layout/functions preserved ===== */
+:root{
+  --ink:#20242c; --muted:#8c929b; --paper:#fffdfa; --bg:#fff7f2;
+  --pink:#ff5f7d; --pink2:#ff8ca1; --pinksoft:#ffe7ec;
+  --mint:#48c397; --mintsoft:#d9f4e9; --blue:#3e8cff;
+  --gray:#edf0ef; --line:#f0e7e1;
+}
+html{background:#fff7f2}
+body{
+  background:
+    radial-gradient(circle at 85% 2%,rgba(255,150,169,.20),transparent 26%),
+    radial-gradient(circle at 10% 24%,rgba(255,214,196,.26),transparent 28%),
+    linear-gradient(180deg,#fffaf6 0%,#fff6f0 52%,#f7f7f4 100%)!important;
+  color:var(--ink)!important;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Pretendard",sans-serif!important;
+}
+.app{max-width:460px!important;padding:18px 16px calc(92px + env(safe-area-inset-bottom))!important}
+.top{padding:6px 4px 12px!important}
+.top h1{font-size:27px!important;font-weight:900!important;letter-spacing:-1.1px!important}
+.card{
+  background:rgba(255,253,250,.96)!important;
+  border:1px solid rgba(150,111,88,.10)!important;
+  border-radius:24px!important;
+  box-shadow:0 10px 30px rgba(115,80,55,.07)!important;
+  padding:17px!important;
+  margin-bottom:13px!important;
+}
+.sectiontitle{font-weight:850!important;font-size:16px!important;letter-spacing:-.4px!important}
+button{font-family:inherit}
+button:active{transform:scale(.965)}
+
+/* Calendar */
+.week,.calendar{gap:7px!important}
+.week{color:#87909a!important;font-size:11px!important;font-weight:750!important;padding:0 3px 7px!important}
+.day{
+  border:0!important; border-radius:50%!important; aspect-ratio:1/1!important;
+  min-height:0!important; padding:4px 1px!important; background:transparent!important;
+  box-shadow:none!important; position:relative!important;
+}
+.day .num{font-weight:750!important;font-size:13px!important}
+.day .count{font-size:8px!important;line-height:1!important;margin-top:1px!important}
+.day.done{background:var(--mint)!important;color:#fff!important}
+.day.partial{background:var(--mintsoft)!important;color:#235847!important}
+.day.skipped{background:#ffdce4!important;color:#a4465b!important}
+.day.draft{background:#fff0c9!important;color:#8b6a16!important}
+.day.today{outline:2.5px solid var(--blue)!important;outline-offset:2px!important}
+.day .status{position:absolute!important;bottom:-5px!important;left:50%!important;transform:translateX(-50%)!important;font-size:8px!important}
+.legend{
+  border-top:1px solid var(--line)!important;margin-top:15px!important;padding-top:13px!important;
+  display:flex!important;justify-content:center!important;gap:11px!important;flex-wrap:wrap!important;
+  font-size:10px!important;color:#747b84!important
+}
+
+/* Record screen — exact structure retained, much stronger skin */
+#recordView .top{background:transparent!important}
+#recordView .card{overflow:hidden}
+#recordView .sectiontitle{display:flex;align-items:center;gap:6px}
+.setrow input, input[type=number]{
+  background:linear-gradient(135deg,#fff5f6,#ffeef2)!important;
+  border:1px solid #ffe1e7!important;border-radius:18px!important;
+  font-size:30px!important;font-weight:900!important;color:#171a20!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9)!important
+}
+.setrow button{
+  border-radius:16px!important;border:0!important;background:#eaf2ff!important;color:#3279df!important;
+  font-weight:800!important
+}
+.bonus{
+  display:grid!important;grid-template-columns:1fr 1fr auto 1fr 1fr!important;
+  gap:7px!important;align-items:center!important
+}
+.bonus button{
+  width:100%!important;min-width:0!important;height:48px!important;border:0!important;
+  border-radius:15px!important;font-size:12px!important;font-weight:850!important
+}
+.bonus button:nth-child(1),.bonus button:nth-child(2){background:#edf3ff!important;color:#315d9d!important}
+.bonus button:nth-child(4),.bonus button:nth-child(5){background:#ffecef!important;color:#a43d55!important}
+.bonus b{
+  min-width:56px!important;text-align:center!important;font-size:25px!important;font-weight:900!important;
+  color:#20242c!important
+}
+#moods{gap:7px!important}
+#moods button{
+  background:#fff!important;border:2px solid transparent!important;border-radius:18px!important;
+  box-shadow:0 3px 12px rgba(80,70,60,.05)!important;padding:8px 5px!important
+}
+#moods button.selected{border-color:#ff718b!important;background:#fff2f5!important;box-shadow:0 0 0 3px #ffe2e8!important}
+.memo{
+  background:#fff!important;border:1px solid #e8e4e0!important;border-radius:17px!important;
+  padding:13px!important;box-shadow:inset 0 1px 3px rgba(40,30,20,.025)!important
+}
+#skip{
+  width:100%!important;background:#fff0f3!important;color:#bd4860!important;
+  border:1px solid #ffd5dd!important;border-radius:16px!important;padding:13px!important;font-weight:850!important
+}
+.actions{
+  position:sticky!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;
+  z-index:9!important;padding:8px!important;border-radius:22px!important;
+  background:rgba(255,250,246,.88)!important;backdrop-filter:blur(14px)!important;-webkit-backdrop-filter:blur(14px)!important
+}
+.draftbtn{background:#fff!important;color:#626a73!important;border:1px solid #e6e2de!important;border-radius:17px!important}
+.savebtn{
+  background:linear-gradient(135deg,var(--pink),#ff7991)!important;color:#fff!important;border:0!important;
+  border-radius:17px!important;box-shadow:0 9px 22px rgba(255,95,125,.25)!important
+}
+
+/* Stats */
+.statgrid{gap:10px!important}
+.statbox{
+  background:linear-gradient(145deg,#fff,#fffaf5)!important;border:1px solid #f1e8e2!important;
+  border-radius:19px!important;padding:15px!important;box-shadow:0 5px 16px rgba(90,65,45,.04)!important
+}
+.statbox small{color:#8c929b!important}.statbox strong{font-weight:900!important}
+.mbar{background:#61cda7!important}.mbar.goal{background:#ff8298!important}
+.bar{background:linear-gradient(180deg,#64cda9,#a7e4cf)!important;border-radius:8px 8px 3px 3px!important}
+
+/* Bottom nav */
+.bottom{
+  background:rgba(255,253,250,.92)!important;border:1px solid rgba(160,120,95,.09)!important;
+  box-shadow:0 -5px 22px rgba(90,65,45,.06)!important;
+  backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important
+}
+.tab{color:#969da4!important}.tab.active{color:var(--pink)!important;font-weight:850!important}
+.toast{background:#24272d!important;border-radius:16px!important}
+
 </style></head><body><main class="app">
-<div id="previewNote" style="margin:10px 0;padding:10px 12px;border-radius:12px;background:#fff4d6;font-size:12px;color:#6d5a20">파일 미리보기에서는 날짜만 표시됩니다. 기록 기능은 Safari에서 열어 사용하세요.</div><section id="calendarView" class="view active"><div class="top"><div><div class="goal">오늘도 가볍게, 꾸준하게</div><h1>혜안’s Jump</h1></div><div class="goal">목표 <b id="goalTop">1,500</b>회</div></div><div class="card"><div class="monthhead"><button id="prev">‹</button><div id="monthTitle" class="monthtitle">2026년 10월</div><button id="next">›</button></div><div class="week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div id="calendar" class="calendar"><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><button class="day" data-static-day="1"><span class="num">1</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="2"><span class="num">2</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="3"><span class="num">3</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="4"><span class="num">4</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="5"><span class="num">5</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="6"><span class="num">6</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="7"><span class="num">7</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="8"><span class="num">8</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="9"><span class="num">9</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="10"><span class="num">10</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="11"><span class="num">11</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="12"><span class="num">12</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="13"><span class="num">13</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="14"><span class="num">14</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="15"><span class="num">15</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="16"><span class="num">16</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="17"><span class="num">17</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="18"><span class="num">18</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="19"><span class="num">19</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="20"><span class="num">20</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="21"><span class="num">21</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="22"><span class="num">22</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="23"><span class="num">23</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="24"><span class="num">24</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="25"><span class="num">25</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="26"><span class="num">26</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="27"><span class="num">27</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="28"><span class="num">28</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="29"><span class="num">29</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="30"><span class="num">30</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="31"><span class="num">31</span><span class="statusdot"></span><span class="count"></span></button></div><div class="legend"><span>✓ 목표달성</span><span>● 목표미달</span><span>○ 안 함</span><span>✎ 임시저장</span></div></div><div class="card"><div class="sectiontitle">이번 달</div><div id="summary" class="summary"><div class="metric"><b>0</b><span>목표달성</span></div><div class="metric"><b>0</b><span>운동일</span></div><div class="metric"><b>0</b><span>총 횟수</span></div><div class="metric"><b>0%</b><span>달성률</span></div></div></div></section>
+<div id="previewNote" style="margin:10px 0;padding:10px 12px;border-radius:12px;background:#fff4d6;font-size:12px;color:#6d5a20">파일 미리보기에서는 날짜만 표시됩니다. 기록 기능은 Safari에서 열어 사용하세요.</div><section id="calendarView" class="view active"><div class="top"><div><div class="goal">오늘도 가볍게, 꾸준하게</div><h1>혜안’s Jump <span style="font-size:17px">🩷</span></h1></div><div class="goal">목표 <b id="goalTop">1,500</b>회</div></div><div class="card"><div class="monthhead"><button id="prev">‹</button><div id="monthTitle" class="monthtitle">2026년 10월</div><button id="next">›</button></div><div class="week"><span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span></div><div id="calendar" class="calendar"><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><div class="day blank"></div><button class="day" data-static-day="1"><span class="num">1</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="2"><span class="num">2</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="3"><span class="num">3</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="4"><span class="num">4</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="5"><span class="num">5</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="6"><span class="num">6</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="7"><span class="num">7</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="8"><span class="num">8</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="9"><span class="num">9</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="10"><span class="num">10</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="11"><span class="num">11</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="12"><span class="num">12</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="13"><span class="num">13</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="14"><span class="num">14</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="15"><span class="num">15</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="16"><span class="num">16</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="17"><span class="num">17</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="18"><span class="num">18</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="19"><span class="num">19</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="20"><span class="num">20</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="21"><span class="num">21</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="22"><span class="num">22</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="23"><span class="num">23</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="24"><span class="num">24</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="25"><span class="num">25</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="26"><span class="num">26</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="27"><span class="num">27</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="28"><span class="num">28</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="29"><span class="num">29</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="30"><span class="num">30</span><span class="statusdot"></span><span class="count"></span></button><button class="day" data-static-day="31"><span class="num">31</span><span class="statusdot"></span><span class="count"></span></button></div><div class="legend"><span>✓ 목표달성</span><span>● 목표미달</span><span>○ 안 함</span><span>✎ 임시저장</span></div></div><div class="card"><div class="sectiontitle">이번 달</div><div id="summary" class="summary"><div class="metric"><b>0</b><span>목표달성</span></div><div class="metric"><b>0</b><span>운동일</span></div><div class="metric"><b>0</b><span>총 횟수</span></div><div class="metric"><b>0%</b><span>달성률</span></div></div></div></section>
 <section id="recordView" class="view"><button class="back" id="back">‹ 달력</button><div id="recordTitle" class="recordTitle"></div><div class="card"><div class="bigTotal"><span id="total" class="n">0</span><span class="unit"> 회</span></div><div class="progress"><div id="prog"></div></div><div id="remain" class="remain"></div></div><div class="card"><div class="sectiontitle">줄넘기 횟수</div><div id="expr" class="expression">아직 입력한 세트가 없어요</div><div class="entryrow"><input id="setInput" type="number" inputmode="numeric" min="1" placeholder="예: 100"><button id="addSet" class="addbtn">+ 추가</button></div><button id="undo" class="undo">↶ 마지막 세트 취소</button></div><div class="card"><div class="sectiontitle">보너스 횟수</div><div class="bonus"><button id="minus100">−100</button><button id="minus">−10</button><b id="bonus">0</b><button id="plus">+10</button><button id="plus100">+100</button></div></div><div class="card"><div class="sectiontitle">오늘 기분</div><div id="moods" class="moods"></div></div><div class="card"><div class="sectiontitle">한줄 메모 <span style="font-weight:400;color:#999">(선택)</span></div><textarea id="memo" class="memo" rows="2" placeholder="오늘은 어땠나요?"></textarea></div><div class="card"><div class="sectiontitle">오늘은 쉬는 날인가요?</div><textarea id="skipReason" class="memo" rows="2" placeholder="스킵 이유 (예: 휴식, 컨디션, 일정)"></textarea><button id="skip" class="danger" style="margin-top:10px">↷ 오늘 스킵</button></div><div class="actions"><button id="draft" class="draftbtn">임시저장</button><button id="save" class="savebtn">기록하기</button></div></section>
 <section id="statsView" class="view"><div class="top"><h1>통계</h1></div>
 <div class="card"><div class="sectionhead"><h3>전체 요약</h3><span>누적 기록</span></div><div id="allStats" class="statgrid"></div></div>
