@@ -142,7 +142,21 @@ button:active{transform:scale(.965)}
 <div class="card"><div class="sectionhead"><h3>월별 상세</h3><span>최근 6개월</span></div><div id="monthRows" class="monthrows"></div></div>
 <div class="card"><div class="sectionhead"><h3>최근 7일 추이</h3><span>목표 기준</span></div><div id="bars" class="bars"></div></div></section>
 <section id="settingsView" class="view"><div class="top"><h1>설정</h1></div><div class="card settings"><label>하루 목표 횟수</label><input id="goalInput" type="number" min="10" step="10"><button id="goalSave" class="savebtn" style="border:0;border-radius:14px;padding:13px;width:100%;margin-top:10px">목표 저장</button><button id="reset" class="danger">모든 기록 삭제</button></div><div class="card" style="font-size:12px;color:#777;line-height:1.6">기록은 이 브라우저의 기기에만 저장됩니다. Safari 데이터 삭제나 기기 변경 시 사라질 수 있어요.</div></section>
-</main><nav class="bottom"><button class="tab active" data-v="calendarView"><i>▦</i>달력</button><button class="tab" data-v="statsView"><i>▥</i>통계</button><button class="tab" data-v="settingsView"><i>⚙︎</i>설정</button></nav><div id="toast" class="toast"></div>
+</main><nav class="bottom"><button class="tab active" data-v="calendarView"><i>▦</i>달력</button><button class="tab" data-v="statsView"><i>▥</i>통계</button><button class="tab" data-v="settingsView"><i>⚙︎</i>설정</button></nav>
+<div class="card" id="dataTransferCard">
+  <div class="sectiontitle">📦 기록 옮기기 · 백업</div>
+  <p style="font-size:13px;color:#7d838c;line-height:1.55;margin:8px 0 14px">
+    Safari와 홈 화면 앱의 기록이 다를 때 사용해요. Safari에서 내보낸 뒤 홈 화면 앱에서 가져오면 됩니다.
+  </p>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:9px">
+    <button id="exportData" class="draftbtn" style="padding:13px 8px">⬆️ 기록 내보내기</button>
+    <button id="importData" class="savebtn" style="padding:13px 8px">⬇️ 기록 가져오기</button>
+  </div>
+  <textarea id="transferData" class="memo" rows="5" style="margin-top:10px;font-size:11px"
+    placeholder="내보내기를 누르면 백업 코드가 여기에 생겨요. 가져올 때는 코드를 붙여넣으세요."></textarea>
+  <p id="transferHint" style="font-size:11px;color:#9a9fa6;margin:8px 2px 0">가져오기는 현재 기록과 합쳐집니다. 같은 날짜는 더 최근에 저장한 기록을 우선합니다.</p>
+</div>
+<div id="toast" class="toast"></div>
 <script>
 document.getElementById('previewNote').style.display='none';const KEY='jumpday-v1';let storageOK=true;let db={goal:1500,records:{}};try{const raw=localStorage.getItem(KEY);if(raw)db=JSON.parse(raw)}catch(e){storageOK=false;console.warn('저장소를 사용할 수 없습니다',e)}if(!db.goal)db.goal=1500;if(!db.records)db.records={};let cursor=new Date();cursor.setDate(1);let selected='',working=null;const $=id=>document.getElementById(id),fmt=n=>Number(n||0).toLocaleString('ko-KR');const key=d=>[d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-');const todayKey=key(new Date());function persist(){try{localStorage.setItem(KEY,JSON.stringify(db));storageOK=true}catch(e){storageOK=false;console.warn('저장 실패',e);toast('이 화면에서는 저장이 제한돼요')}}function total(r){return (r?.sets||[]).reduce((a,b)=>a+b,0)+(r?.bonus||0)}function toast(s){$('toast').textContent=s;$('toast').classList.add('show');setTimeout(()=>$('toast').classList.remove('show'),1400)}
 function renderCal(){let y=cursor.getFullYear(),m=cursor.getMonth();$('monthTitle').textContent=`${y}년 ${m+1}월`;$('goalTop').textContent=fmt(db.goal);$('calendar').innerHTML='';let first=new Date(y,m,1).getDay(),days=new Date(y,m+1,0).getDate();for(let i=0;i<first;i++)$('calendar').insertAdjacentHTML('beforeend','<div class="day blank"></div>');for(let d=1;d<=days;d++){let dt=new Date(y,m,d),k=key(dt),r=db.records[k],t=total(r),b=document.createElement('button');b.className='day';if(k===todayKey)b.classList.add('today');let icon='';if(r?.status==='skipped'){b.classList.add('skipped');icon='↷'}else if(r?.status==='draft'){b.classList.add('draft');icon='✎'}else if(r?.status==='saved'&&t>=db.goal){b.classList.add('done');icon='✓'}else if(r?.status==='saved'&&t>0){b.classList.add('partial');icon='●'}else if(k<todayKey){b.classList.add('pastempty');icon='○'}b.innerHTML=`<span class="num">${d}</span><span class="statusdot">${icon}</span><span class="count">${r?fmt(t):''}</span>`;b.onclick=()=>openRecord(k);$('calendar').appendChild(b)}renderSummary()}
@@ -168,4 +182,55 @@ function richStats(){
 }
 function renderStats(){let now=new Date(),arr=[];for(let i=6;i>=0;i--){let d=new Date(now);d.setDate(now.getDate()-i);let r=db.records[key(d)],t=r?.status==='saved'?total(r):0;arr.push([`${d.getMonth()+1}/${d.getDate()}`,t])}let max=Math.max(db.goal,...arr.map(x=>x[1]));$('bars').innerHTML=arr.map(([l,n])=>`<div class="barcol"><div>${n?fmt(n):''}</div><div class="bar" style="height:${Math.max(2,n/max*120)}px"></div>${l}</div>`).join('');richStats()}
 renderCal();
-</script></body></html>
+
+// v9: Safari ↔ Home Screen data transfer
+(function(){
+  function setupTransfer(){
+    const exp=document.getElementById('exportData'), imp=document.getElementById('importData'),
+          box=document.getElementById('transferData');
+    if(!exp||!imp||!box) return;
+
+    exp.onclick=async()=>{
+      const raw=localStorage.getItem('jumpday-v1')||'';
+      if(!raw){ toast('내보낼 기록이 없어요'); return; }
+      const payload='HYEANJUMP1:'+btoa(unescape(encodeURIComponent(raw)));
+      box.value=payload;
+      box.focus(); box.select();
+      try{
+        await navigator.clipboard.writeText(payload);
+        toast('백업 코드를 복사했어요 ✓');
+      }catch(e){ toast('백업 코드가 만들어졌어요. 전체 복사해 주세요'); }
+    };
+
+    imp.onclick=()=>{
+      let code=box.value.trim();
+      if(!code){ toast('Safari에서 만든 백업 코드를 붙여넣어 주세요'); return; }
+      try{
+        if(code.startsWith('HYEANJUMP1:')) code=decodeURIComponent(escape(atob(code.slice(11))));
+        const incoming=JSON.parse(code);
+        if(!incoming || typeof incoming!=='object' || !incoming.records) throw new Error('bad');
+
+        let current={goal:1500,records:{}};
+        try{ current=JSON.parse(localStorage.getItem('jumpday-v1'))||current; }catch(e){}
+        current.goal=incoming.goal||current.goal||1500;
+        current.records=current.records||{};
+
+        Object.entries(incoming.records||{}).forEach(([k,r])=>{
+          const old=current.records[k];
+          if(!old || Number(r.updatedAt||0)>=Number(old.updatedAt||0)) current.records[k]=r;
+        });
+
+        localStorage.setItem('jumpday-v1',JSON.stringify(current));
+        toast('기록을 가져왔어요 ✓');
+        setTimeout(()=>location.reload(),650);
+      }catch(e){
+        toast('백업 코드를 확인해 주세요');
+      }
+    };
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',setupTransfer);
+  else setupTransfer();
+})();
+
+</script><!-- Hyean Jump v9 data-transfer -->
+</body></html>
