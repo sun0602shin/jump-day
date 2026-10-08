@@ -330,5 +330,28 @@ renderCal();
   else setupTransferV10();
 })();
 
+
+// v13 counter controls — preserves existing jumpday-v1 storage and backup formats
+(function(){
+ let count=0;
+ const el=id=>document.getElementById(id);
+ function draw(){el('counterNumber').textContent=count.toLocaleString('ko-KR');el('counterApply').textContent='반영하기 (+'+count.toLocaleString('ko-KR')+'회)';}
+ function returnRecord(){show('recordView');document.body.classList.remove('counter-mode');}
+ el('openCounter').addEventListener('click',()=>{
+   if(!working)return;
+   working.memo=el('memo').value;
+   working.skipReason=el('skipReason').value;
+   count=0;draw();show('counterView');document.body.classList.add('counter-mode');
+ });
+ el('counterTap').addEventListener('click',()=>{count++;draw();});
+ el('counterTap').addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();count++;draw();}});
+ el('counterMinus').addEventListener('click',()=>{count=Math.max(0,count-1);draw();});
+ el('counterReset').addEventListener('click',()=>{if(count===0||confirm('카운팅 횟수를 0으로 초기화할까요?')){count=0;draw();}});
+ el('counterBack').addEventListener('click',()=>{if(count>0&&!confirm('반영하지 않은 '+count+'회를 버리고 돌아갈까요?'))return;returnRecord();});
+ el('counterApply').addEventListener('click',()=>{
+   if(count>0){working.sets.push(count);working.skipReason='';}
+   returnRecord();renderRecord();toast(count>0?'+'+count.toLocaleString('ko-KR')+'회 반영했어요 ✓':'추가할 횟수가 없어요');count=0;
+ });
+})();
 </script><!-- Hyean Jump v11 file backup, v10-compatible -->
 </body></html>
